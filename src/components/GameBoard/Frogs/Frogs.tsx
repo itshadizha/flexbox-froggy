@@ -6,12 +6,17 @@ import yellowFrog from "../../../assets/images/frog-yellow.svg";
 interface FrogsProps {
   color: string;
   id?: number;
+  style: string
 }
 
-const Frogs = ({ color }: FrogsProps) => {
+
+
+const Frogs = ({ color , style}: FrogsProps) => {
+
+
   return (
-    <Frog>
-      <FilledFrog color={color} />
+    <Frog sx={style}>
+      <FilledFrog  color={color} />
     </Frog>
   );
 };
@@ -47,7 +52,7 @@ const FilledFrog = styled(Box)<{ color: string }>(({ color }) => ({
   backgroundRepeat: "no-repeat",
   backgroundImage: getBackgroundImage(color),
 
-  // animation: `${animatedFrog}`,
+  animation: `${animatedFrog}`,
   animationDuration: "1s",
   animationIterationCount: "infinite",
   animationTimingFunction: "linear",

@@ -5,13 +5,15 @@ import { LevelsTypes } from "../../../store/froggyState/initialState";
 interface FrogsProps {
   style: string | undefined;
   level: LevelsTypes;
+  lilypadColor: string;
 }
 
-const MoveFrogs = ({ style, level }: FrogsProps) => {
+const MoveFrogs = ({ style, level, lilypadColor }: FrogsProps) => {
   const frogs = level.colors.map((color, i) => {
-    return <Frogs color={color} key={i} />;
+    const singleFrogStyle = lilypadColor === color ? style : "";
+
+    return <Frogs style={singleFrogStyle} color={color} key={i} />;
   });
-  console.log(level, "level from frog")
 
   return <Pond sx={style}>{frogs}</Pond>;
 };

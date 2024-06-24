@@ -5,25 +5,28 @@ import { LevelsTypes } from "../../../../store/froggyState/initialState";
 import { useAppDispatch } from "../../../../hook";
 import { resetLevels } from "../../../../store/froggySlice/froggySlice";
 
-
 interface DropdownMenuProps {
   levels: LevelsTypes[];
   onClose: () => void;
 }
 
-
 const DropdownMenu: React.FC<DropdownMenuProps> = ({ levels, onClose }) => {
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
   const resetGame = () => {
-    dispatch(resetLevels())
-  }
-  
+    dispatch(resetLevels());
+  };
+
   return (
     <MenuWrapper>
       <Levels>
         {levels.map((levelObj) => (
-          <Level onClose={onClose} key={levelObj.level} isCompletelevel={levelObj.isComplete} level={levelObj.level} />
+          <Level
+            onClose={onClose}
+            key={levelObj.level}
+            isCompletelevel={levelObj.isComplete}
+            level={levelObj.level}
+          />
         ))}
       </Levels>
       <ResetButton onClick={resetGame}>Сбросить</ResetButton>

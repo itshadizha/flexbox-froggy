@@ -2,14 +2,16 @@ import { Box, styled } from "@mui/material";
 import greenPad from "../../../assets/images/lilypad-green.svg";
 import redPad from "../../../assets/images/lilypad-red.svg";
 import yellowPad from "../../../assets/images/lilypad-yellow.svg";
+import { LilypadStylesType } from "../../../store/froggyState/initialState";
 
 interface LilypadProps {
   color: string;
+  style: LilypadStylesType;
 }
 
-const LilyPads = ({ color }: LilypadProps) => {
+const LilyPads = ({ color, style }: LilypadProps) => {
   return (
-    <Lilypad>
+    <Lilypad sx={style}>
       <FilledPad color={color}></FilledPad>
     </Lilypad>
   );

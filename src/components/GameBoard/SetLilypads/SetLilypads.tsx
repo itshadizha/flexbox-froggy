@@ -1,21 +1,29 @@
 import { Box, styled } from "@mui/material";
 import LilyPads from "../Lilypads/LilyPads";
-import { LevelsTypes } from "../../../store/froggyState/initialState";
+import {
+  LevelsTypes,
+  LilypadStylesType,
+} from "../../../store/froggyState/initialState";
 
 interface LilyPadsProps {
-  style: object | undefined,
-  lilypad: object,
-  level: LevelsTypes,
+  style: LilypadStylesType | undefined;
+  level: LevelsTypes;
+  lilypadColor: string;
 }
 
-const SetLilypads = ({ style , level, lilypad}: LilyPadsProps) => {
-const lilypadPositions = level.colors.map((color, i) => {
-  return <LilyPads color={color} key={i}/>
-})
+const SetLilypads = ({ style, level, lilypadColor }: LilyPadsProps) => {
+  const lilypadPositions = level.colors.map((color, i) => {
+    // if (lilypadColor === color) style = { style };
+    const singleLilypadStyle = lilypadColor === color ? style : "";
+
+    console.log(style, "style Lilypad");
+
+    return <LilyPads style={singleLilypadStyle} color={color} key={i} />;
+  });
 
   return (
-    <LilypadBackground sx={style}>
-    {lilypadPositions}
+    <LilypadBackground sx={level.level === 15 ? level.div : style}>
+      {lilypadPositions}
     </LilypadBackground>
   );
 };

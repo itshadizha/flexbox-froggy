@@ -1,48 +1,57 @@
 import { Box, Typography, styled } from "@mui/material";
-import { useState } from "react";
+import { FC, useState } from "react";
 import BackButton from "./GoBackButton/BackButton";
 import CurrentLevel from "./CurrentLevel/CurrentLevel";
 import NextButton from "./NextButton/NextButton";
 import DropdownMenu from "./DropdownMenu/DropdownMenu";
 import { useAppDispatch, useAppSelector } from "../../../hook";
-import { setCurrentLevel } from "../../../store/froggySlice/froggySlice";
+import {
+  setCurrentLevel,
+  setStyles,
+} from "../../../store/froggySlice/froggySlice";
+
+interface HeaderProps {
+  setUserStylesValue: () => void,
+}
 
 
+const Header = ({ setUserStylesValue }: HeaderProps ) => {
 
-const Header: React.FC = () => {
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
 
-  const {currentLevel} = useAppSelector(state => state.froggy)
+  const { currentLevel } = useAppSelector((state) => state.froggy);
 
-  const {levels} = useAppSelector(state => state.froggy)
+  const { levels } = useAppSelector((state) => state.froggy);
 
-  const level = levels.find((item) => item.level === currentLevel)
+  const level = levels.find((item) => item.level === currentLevel);
 
   const [showMenu, setShowMenu] = useState<boolean>(false);
 
   const showLevelsHandler = (e: React.MouseEvent) => {
-    e.stopPropagation()
+    e.stopPropagation();
     setShowMenu((prev) => !prev);
   };
 
   interface CloseFParametr {
-    level: number
+    level: number;
   }
 
-  const closeDropDownMenu = ({level}: CloseFParametr) => {
-    dispatch(setCurrentLevel(level))
-    setShowMenu(false)
-
-  }
+  const closeDropDownMenu = ({ level }: CloseFParametr) => {
+    dispatch(setCurrentLevel(level));
+    setShowMenu(false);
+    setUserStylesValue("");
+  };
 
   const nextLevelHandler = () => {
-    dispatch(setCurrentLevel(currentLevel + 1))
-  }
- 
+    dispatch(setCurrentLevel(currentLevel + 1));
+    dispatch(setStyles(""));
+    setUserStylesValue("");
+  };
+
   const previousLevelHandler = () => {
-    dispatch(setCurrentLevel(currentLevel - 1))
-  }
- 
+    dispatch(setCurrentLevel(currentLevel - 1));
+    setUserStylesValue("");
+  };
 
   return (
     <HeaderStyled component="header">
@@ -53,8 +62,14 @@ const Header: React.FC = () => {
       <LevelsContainer>
         <BackButton onClick={previousLevelHandler} />
         <CurrentLevelContainer onClick={showLevelsHandler}>
-          <CurrentLevel  selectedLevel={level?.level}/>
-          {showMenu && <DropdownMenu level={level} onClose={closeDropDownMenu} levels={levels} />}
+          <CurrentLevel selectedLevel={level?.level} />
+          {showMenu && (
+            <DropdownMenu
+              level={level}
+              onClose={closeDropDownMenu}
+              levels={levels}
+            />
+          )}
         </CurrentLevelContainer>
         <NextButton onClick={nextLevelHandler} />
       </LevelsContainer>

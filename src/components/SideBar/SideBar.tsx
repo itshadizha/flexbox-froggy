@@ -3,15 +3,21 @@ import Header from "./Header/Header";
 import Instructions from "./Instructions/Instructions";
 import Textarea from "./Texarea/Textarea";
 import Footer from "./Footer/Footer";
+import { useState } from "react";
 
 const SideBar = () => {
+  const [userStylesValue, setUserStylesValue] = useState("");
+
   return (
     <SideBarContainer component="section">
-      <Header />
+      <Header setUserStylesValue={setUserStylesValue} />
 
       <Instructions />
 
-      <Textarea />
+      <Textarea
+        setUserStylesValue={setUserStylesValue}
+        userStylesValue={userStylesValue}
+      />
 
       <Footer />
     </SideBarContainer>

@@ -7,7 +7,7 @@ import {
   setStyles,
 } from "../../../store/froggySlice/froggySlice";
 
-const Textarea = () => {
+const Textarea = ({ setUserStylesValue, userStylesValue }) => {
   const dispatch = useAppDispatch();
 
   const { currentLevel } = useAppSelector((state) => state.froggy);
@@ -19,11 +19,13 @@ const Textarea = () => {
 
   const { userStyles } = useAppSelector((state) => state.froggy);
 
-  const [userStylesValue, setUserStylesValue] = useState(level?.playerAnswer);
+  // const [userStylesValue, setUserStylesValue] = useState(level?.playerAnswer);
 
-  // useEffect(() => {
-  //   setUserStylesValue(level?.playerAnswer);
-  // }, [userStylesValue]);
+  useEffect(() => {
+    if (level?.playerAnswer !== "") {
+      setUserStylesValue(level?.playerAnswer);
+    }
+  }, [userStylesValue]);
 
   const changeToNextLevel = () => {
     dispatch(setCurrentLevel(currentLevel + 1));
@@ -36,13 +38,12 @@ const Textarea = () => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      dispatch(setStyles(userStylesValue));
+      return dispatch(setStyles(userStylesValue));
     }, 1000);
 
     return () => clearInterval(timer);
   }, [dispatch, userStylesValue]);
 
-  console.log(level?.isComplete, "complete");
 
   return (
     <Wrapper>
@@ -54,14 +55,17 @@ const Textarea = () => {
 
         <DefaultStyle>
           {`#pond {
-  display: flex;`}
+  display: flex;`} {level.level > 13 ? ("}  ." + `${level?.lilypadColor}` + "{" ) : ("")}
         </DefaultStyle>
 
         <MyTextarea value={userStylesValue} onChange={handleUserStylesChange} />
 
         <DefaultStyle>{"}"}</DefaultStyle>
 
-        <StyledButton disabled={level?.isComplete} onClick={changeToNextLevel}>
+        <StyledButton
+          disabled={userStylesValue.trim() !== level?.correctAnswer.trim()}
+          onClick={changeToNextLevel}
+        >
           Следующий
         </StyledButton>
       </FieldStyles>
@@ -119,8 +123,8 @@ const StyledButton = styled(Button)(({ disabled }) => ({
   right: "1em",
   bottom: "1em",
   paddingTop: "0.3em",
-  backgroundColor: !disabled ? "gray" : "red",
-  animationName: disabled ? `${buttonShake}` : "",
+  backgroundColor: !disabled ? "red" : "gray",
+  animationName: !disabled ? `${buttonShake}` : "",
   animationDuration: "1s",
   animationFillMode: "both",
   transitionTimingFunction: "cubic-bezier(.36, .07, .19, .97)",
