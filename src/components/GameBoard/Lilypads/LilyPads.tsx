@@ -6,7 +6,7 @@ import { LilypadStylesType } from "../../../store/froggyState/initialState";
 
 interface LilypadProps {
   color: string;
-  style: LilypadStylesType;
+  style: LilypadStylesType ;
 }
 
 const LilyPads = ({ color, style }: LilypadProps) => {

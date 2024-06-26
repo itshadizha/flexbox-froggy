@@ -19,9 +19,9 @@ const GameBoard = () => {
   );
 
   const { userStyles } = useAppSelector((state) => state.froggy);
-  const lilypadStyle = level?.lilypadStyles ;
+  const lilypadStyle = level?.lilypadStyles;
 
-const lilypadColor  = level?.lilypadColor
+  const lilypadColor = level?.lilypadColor;
 
   const stringsToCheck: MatchingStrings = {
     str1: level?.correctAnswer ?? "",
@@ -29,7 +29,6 @@ const lilypadColor  = level?.lilypadColor
   };
 
   useEffect(() => {
-
     if (isMatch(stringsToCheck)) {
       dispatch(completeLevel(level?.level));
 
@@ -37,11 +36,14 @@ const lilypadColor  = level?.lilypadColor
     }
   }, [dispatch, userStyles, level?.correctAnswer]);
 
-
   return (
     <Board>
       <MoveFrogs lilypadColor={lilypadColor} level={level} style={userStyles} />
-      <SetLilypads level={level} lilypadColor={lilypadColor} style={lilypadStyle} />
+      <SetLilypads
+        level={level}
+        lilypadColor={lilypadColor}
+        style={lilypadStyle}
+      />
     </Board>
   );
 };

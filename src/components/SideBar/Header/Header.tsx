@@ -1,5 +1,5 @@
 import { Box, Typography, styled } from "@mui/material";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import BackButton from "./GoBackButton/BackButton";
 import CurrentLevel from "./CurrentLevel/CurrentLevel";
 import NextButton from "./NextButton/NextButton";
@@ -26,6 +26,11 @@ const Header = ({ setUserStylesValue }: HeaderProps ) => {
   const level = levels.find((item) => item.level === currentLevel);
 
   const [showMenu, setShowMenu] = useState<boolean>(false);
+
+  useEffect(() => {
+localStorage.setItem("levelProgress", JSON.stringify(level))
+
+  } , [level])
 
   const showLevelsHandler = (e: React.MouseEvent) => {
     e.stopPropagation();

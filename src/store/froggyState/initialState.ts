@@ -42,7 +42,7 @@ export const initialState: InitState = {
       isComplete: false,
       colors: ["green"],
       lilypadStyles: { justifyContent: "flex-end" },
-      correctAnswer: "justify-content: flex-end;",
+      correctAnswer: "justify-content:flex-end",
       playerAnswer: "",
     },
     {
@@ -194,7 +194,7 @@ export const initialState: InitState = {
       lilypadStyles: {
         order: 2,
       },
-            div: {
+      div: {
         flexDirection: "row-reverse",
         justifyContent: "start",
       },
@@ -211,7 +211,7 @@ export const initialState: InitState = {
       lilypadColor: "yellow",
 
       playerAnswer: "",
-      correctAnswer: "align-self: flex-end;",
+      correctAnswer: "align-self: flex-end",
     },
   ],
 };

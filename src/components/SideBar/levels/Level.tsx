@@ -9,11 +9,7 @@ interface LevelProps {
 
 
 const Level: React.FC<LevelProps> = ({ level, isCompletelevel, onClose }) => {
-  // const getLevelNumber = () => {
   
-  // }
-  
-
   return <LevelItem onClick={() => onClose({level})} isComplete={isCompletelevel}>{level}</LevelItem>;
 };
 

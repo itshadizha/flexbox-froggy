@@ -6,17 +6,13 @@ import yellowFrog from "../../../assets/images/frog-yellow.svg";
 interface FrogsProps {
   color: string;
   id?: number;
-  style: string
+  style: string | undefined;
 }
 
-
-
-const Frogs = ({ color , style}: FrogsProps) => {
-
-
+const Frogs = ({ color, style }: FrogsProps) => {
   return (
     <Frog sx={style}>
-      <FilledFrog  color={color} />
+      <FilledFrog color={color} />
     </Frog>
   );
 };

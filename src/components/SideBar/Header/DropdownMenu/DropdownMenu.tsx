@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Button, styled, Box } from "@mui/material";
 import Level from "../../levels/Level";
 import { LevelsTypes } from "../../../../store/froggyState/initialState";
@@ -12,6 +12,7 @@ interface DropdownMenuProps {
 
 const DropdownMenu: React.FC<DropdownMenuProps> = ({ levels, onClose }) => {
   const dispatch = useAppDispatch();
+
 
   const resetGame = () => {
     dispatch(resetLevels());
