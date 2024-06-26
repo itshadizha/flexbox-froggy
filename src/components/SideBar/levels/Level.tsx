@@ -4,13 +4,16 @@ import React from "react";
 interface LevelProps {
   level: number;
   isCompletelevel: boolean;
-  onClose: () => void
+  onClose: (level: number )  => void; 
 }
-
 
 const Level: React.FC<LevelProps> = ({ level, isCompletelevel, onClose }) => {
   
-  return <LevelItem onClick={() => onClose({level})} isComplete={isCompletelevel}>{level}</LevelItem>;
+  const handleClick = () => {
+    onClose(level); 
+  };
+
+  return <LevelItem onClick={handleClick} isComplete={isCompletelevel}>{level}</LevelItem>;
 };
 
 export default Level;

@@ -1,6 +1,6 @@
 export interface PlayerAnswerTypes {
   value: string;
-  level: number;
+  level: number | undefined | LevelsTypes;
 }
 
 export type InitState = {

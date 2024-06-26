@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from "react";
+import { ChangeEvent, useEffect } from "react";
 import { Box, Button, keyframes, styled } from "@mui/material";
 import MyTextarea from "../../UI/TextAreaMui";
 import { useAppDispatch, useAppSelector } from "../../../hook";
@@ -7,25 +7,23 @@ import {
   setStyles,
 } from "../../../store/froggySlice/froggySlice";
 
-const Textarea = ({ setUserStylesValue, userStylesValue }) => {
+interface TextareaProps {
+  setUserStylesValue: (value: string) => void;
+  userStylesValue: string;
+}
+
+const Textarea = ({ setUserStylesValue, userStylesValue }: TextareaProps) => {
   const dispatch = useAppDispatch();
 
-  const { currentLevel } = useAppSelector((state) => state.froggy);
-  const { levels } = useAppSelector((state) => state.froggy);
+  const { currentLevel, levels } = useAppSelector((state) => state.froggy);
 
   const level = levels.find((item) => item.level === currentLevel);
 
-  const state = useAppSelector((state) => state);
-
-  const { userStyles } = useAppSelector((state) => state.froggy);
-
-  // const [userStylesValue, setUserStylesValue] = useState(level?.playerAnswer);
-
   useEffect(() => {
     if (level?.playerAnswer !== "") {
-      setUserStylesValue(level?.playerAnswer);
+      setUserStylesValue(level?.playerAnswer || "");
     }
-  }, [userStylesValue]);
+  }, [level?.playerAnswer, setUserStylesValue]);
 
   const changeToNextLevel = () => {
     dispatch(setCurrentLevel(currentLevel + 1));
@@ -38,24 +36,22 @@ const Textarea = ({ setUserStylesValue, userStylesValue }) => {
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      return dispatch(setStyles(userStylesValue));
+      dispatch(setStyles(userStylesValue));
     }, 1000);
 
     return () => clearInterval(timer);
   }, [dispatch, userStylesValue]);
 
-
   return (
     <Wrapper>
       <FieldStyles>
         <Numbers>
-          1 <br /> 2 <br /> 3 <br /> 4 <br /> 5 <br /> 6 <br /> 7 <br /> 8{" "}
-          <br /> 9 <br /> 10 <br />
+          1 <br /> 2 <br /> 3 <br /> 4 <br /> 5 <br /> 6 <br /> 7 <br /> 8 <br /> 9 <br /> 10 <br />
         </Numbers>
 
         <DefaultStyle>
           {`#pond {
-  display: flex;`} {level.level > 13 ? ("}  ." + `${level?.lilypadColor}` + "{" ) : ("")}
+  display: flex;`} {level && level.level > 13 ? `} .${level.lilypadColor} {` : ""}
         </DefaultStyle>
 
         <MyTextarea value={userStylesValue} onChange={handleUserStylesChange} />
@@ -75,16 +71,16 @@ const Textarea = ({ setUserStylesValue, userStylesValue }) => {
 
 const buttonShake = keyframes`
 10%, 90% {
-transform: translate3d(-1px, 0, 0);
+  transform: translate3d(-1px, 0, 0);
 }
 20%, 80% {
-transform: translate3d(2px, 0, 0);
+  transform: translate3d(2px, 0, 0);
 }
 30%, 50%, 70% {
-transform: translate3d(-4px, 0, 0);
+  transform: translate3d(-4px, 0, 0);
 }
 40%, 60% {
-transform: translate3d(4px, 0, 0);
+  transform: translate3d(4px, 0, 0);
 }
 `;
 

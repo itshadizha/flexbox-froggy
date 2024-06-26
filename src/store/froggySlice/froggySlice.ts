@@ -5,7 +5,7 @@ export const froggySlice = createSlice({
   name: "froggy",
   initialState: initialState,
   reducers: {
-    completeLevel(state, action: PayloadAction<number>) {
+    completeLevel(state, action: PayloadAction<number | undefined>) {
       state.levels = state.levels.map((level) =>
         level.level === action.payload ? { ...level, isComplete: true } : level
       );

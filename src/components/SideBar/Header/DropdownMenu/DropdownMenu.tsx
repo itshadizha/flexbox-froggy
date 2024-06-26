@@ -7,7 +7,7 @@ import { resetLevels } from "../../../../store/froggySlice/froggySlice";
 
 interface DropdownMenuProps {
   levels: LevelsTypes[];
-  onClose: () => void;
+  onClose: (level: number) => void;
 }
 
 const DropdownMenu: React.FC<DropdownMenuProps> = ({ levels, onClose }) => {

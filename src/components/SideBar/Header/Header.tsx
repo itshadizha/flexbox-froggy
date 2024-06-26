@@ -11,16 +11,13 @@ import {
 } from "../../../store/froggySlice/froggySlice";
 
 interface HeaderProps {
-  setUserStylesValue: () => void,
+  setUserStylesValue: (value: string) => void;
 }
 
-
-const Header = ({ setUserStylesValue }: HeaderProps ) => {
-
+const Header: FC<HeaderProps> = ({ setUserStylesValue }) => {
   const dispatch = useAppDispatch();
 
   const { currentLevel } = useAppSelector((state) => state.froggy);
-
   const { levels } = useAppSelector((state) => state.froggy);
 
   const level = levels.find((item) => item.level === currentLevel);
@@ -28,9 +25,8 @@ const Header = ({ setUserStylesValue }: HeaderProps ) => {
   const [showMenu, setShowMenu] = useState<boolean>(false);
 
   useEffect(() => {
-localStorage.setItem("levelProgress", JSON.stringify(level))
-
-  } , [level])
+    localStorage.setItem("levelProgress", JSON.stringify(level));
+  }, [level]);
 
   const showLevelsHandler = (e: React.MouseEvent) => {
     e.stopPropagation();

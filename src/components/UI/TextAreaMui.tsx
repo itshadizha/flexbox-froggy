@@ -1,14 +1,13 @@
-import React from "react";
+import React, { ChangeEvent } from "react";
 import TextField from "@mui/material/TextField";
 import { styled } from "@mui/material";
 
 interface TextareaProps {
   value: string;
-  onChange: () => void;
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
-// Styled component definition
-const MyTextarea = ({ value, onChange }: TextareaProps) => {
+const MyTextarea: React.FC<TextareaProps> = ({ value, onChange }) => {
   return (
     <TextareaStyled
       value={value}
@@ -20,7 +19,6 @@ const MyTextarea = ({ value, onChange }: TextareaProps) => {
   );
 };
 
-// Styling using styled function
 const TextareaStyled = styled(TextField)(({ theme }) => ({
   width: `calc(100% - ${theme.spacing(2)})`,
   fontFamily: "Source Code Pro, monospace",

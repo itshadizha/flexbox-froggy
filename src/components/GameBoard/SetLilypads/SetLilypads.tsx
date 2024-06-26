@@ -7,13 +7,12 @@ import {
 
 interface LilyPadsProps {
   style: LilypadStylesType | undefined;
-  level: LevelsTypes;
-  lilypadColor: string;
+  level: LevelsTypes | undefined;
+  lilypadColor: string | undefined;
 }
 
 const SetLilypads = ({ style, level, lilypadColor }: LilyPadsProps) => {
-  const lilypadPositions = level.colors.map((color, i) => {
-    // if (lilypadColor === color) style = { style };
+  const lilypadPositions = level?.colors.map((color, i) => {
     const singleLilypadStyle = lilypadColor === color ? style : "";
 
     console.log(style, "style Lilypad");
@@ -22,7 +21,7 @@ const SetLilypads = ({ style, level, lilypadColor }: LilyPadsProps) => {
   });
 
   return (
-    <LilypadBackground sx={level.level === 15 ? level.div : style}>
+    <LilypadBackground sx={level?.level === 15 ? level.div : style}>
       {lilypadPositions}
     </LilypadBackground>
   );

@@ -6,7 +6,7 @@ import { LilypadStylesType } from "../../../store/froggyState/initialState";
 
 interface LilypadProps {
   color: string;
-  style: LilypadStylesType ;
+  style: LilypadStylesType | undefined | string;
 }
 
 const LilyPads = ({ color, style }: LilypadProps) => {
@@ -36,14 +36,14 @@ const getBackgroundImage = (color: string) => {
 };
 
 const FilledPad = styled(Box)<{ color: string }>(({ color }) => ({
-  backgroundSize: "cover", // Adjusted to cover the entire pad
-  width: "100%", // Adjusted width of the filled pad
-  height: "100%", // Adjusted height of the filled pad
+  backgroundSize: "cover",
+  width: "100%",
+  height: "100%",
   backgroundPosition: "center center",
   backgroundRepeat: "no-repeat",
   backgroundImage: getBackgroundImage(color),
 
-  transform: "rotate(-45deg)"
+  transform: "rotate(-45deg)",
 }));
 
 const Lilypad = styled(Box)({
@@ -51,10 +51,8 @@ const Lilypad = styled(Box)({
   justifyContent: "center",
   alignItems: "center",
   position: "relative",
-  width: "120px", // Adjusted width of lilypad
-  height: "120px", // Adjusted height of lilypad
-  borderRadius: "50%", // Make lilypad circular
-  backgroundColor: "transparent", // Remove background color if using background image
+  width: "120px",
+  height: "120px",
+  borderRadius: "50%",
+  backgroundColor: "transparent",
 });
-
-
